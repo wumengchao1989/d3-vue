@@ -3,14 +3,19 @@
  */
 import Router from 'vue-router';
 import Vue from 'vue';
-import Geo from '../components/Geo.vue';
+import Geo from '../components/Geo/Geo.vue';
+import Pie from '../components/Shape/Pie.vue';
 Vue.use(Router);
 export default new Router({
-    routes:[
+    routes: [
         {
-            path:'/geo',
-            name:"Geo",
-            component:Geo,
-        },
+            path: '/geo',
+            name: "Geo",
+            component: Geo,
+        }, {
+            path: '/Shape/Pie',
+            name: 'Pie',
+            component: Pie,
+        }
     ]
 })

@@ -5,11 +5,12 @@
 </template>
 <script>
     import * as d3 from 'd3';
-    import china from '../util/GeoJson/china';
+    import china from '../../util/GeoJson/china';
     export default{
         name:"Geo",
         mounted(){
             this.renderChina();
+            this.renderProvince();
         },
         methods:{
             renderChina(){
@@ -37,7 +38,7 @@
                     })
                     .on("mouseout",function(d,i){
                         d3.select(this).attr("fill",d.properties.color)
-                    })
+                    });
                 svg.append("g")
                     .attr("id","circles")
                     .selectAll("circle")
@@ -69,6 +70,9 @@
                     })
                     .attr('fill','#000')
                     .attr('font-size','12px');
+            },
+            renderProvince(){
+
             }
         }
     }
