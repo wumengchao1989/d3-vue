@@ -14,7 +14,7 @@
         methods: {
             renderLine(){
                 let data = [];
-                for (let i = 0; i < 23; i++) {
+                for (let i = 0; i < 30; i++) {
                     data.push({
                         data: i * 10,
                         value: 300 * Math.random()
@@ -24,8 +24,10 @@
                     .append("svg")
                     .attr("height", 1080)
                     .attr("width", 1920);
-                let scale = d3.scaleLinear().domain(0, 1080);
-                let axis = d3.axisLeft(scale);
+                let scale = d3.scaleLinear().domain([0, 300]).range([0,300]);
+                let axisLeft = d3.axisLeft(scale).ticks(5,'s');
+                let axisTop=d3.axisTop(scale).ticks(5,'s');
+
                 let line = d3.line()
                     .x(function (d) {
                         return d.data
@@ -42,7 +44,11 @@
                     .attr("transform", "translate(200,200)");
                 svg.append("g")
                     .attr("transform", "translate(200,200)")
-                    .call(axis)
+                    .call(axisLeft)
+                svg.append("g")
+                    .attr("transform", "translate(200,200)")
+                    .call(axisTop)
+
             }
         }
     }
