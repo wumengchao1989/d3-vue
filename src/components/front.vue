@@ -1,11 +1,13 @@
 <template>
-    <div class="name">
-        <router-view></router-view>
+    <div class="front">
+        <router-link to="/Shape/Pie">Pie</router-link>
+        <router-link to="/Geo">Geo</router-link>
+        <router-link to="/Shape/line">Line</router-link>
     </div>
 </template>
 <script>
     export default{
-        name:"App",
+        name:"front",
         data(){
             return{
 
@@ -23,12 +25,5 @@
     }
 </script>
 <style lang="scss" rel="stylesheet/scss" type="text/css">
-    @import '../style/main.scss';
-    .name{
-       .man{
-           height:$width;
-           width:$width;
-           background: $color;
-       }
-    }
+
 </style>

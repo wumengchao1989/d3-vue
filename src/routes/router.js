@@ -6,9 +6,16 @@ import Vue from 'vue';
 import Geo from '../components/Geo/Geo.vue';
 import Pie from '../components/Shape/Pie.vue';
 import test from '../components/Geo/test.vue';
+import line from '../components/Shape/line.vue';
+import front from '../components/front.vue';
 Vue.use(Router);
 export default new Router({
     routes: [
+        {
+            path: '/',
+            name: 'front',
+            component: front
+        },
         {
             path: '/geo',
             name: "Geo",
@@ -21,6 +28,10 @@ export default new Router({
             path: '/Shape/test',
             name: 'test',
             component: test,
+        }, {
+            path: '/Shape/line',
+            name: 'line',
+            component: line
         }
     ]
 })
