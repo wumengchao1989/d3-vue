@@ -1,22 +1,23 @@
 /**
  * Created by wumengchao on 2018/2/13.
  */
-let promise=new Promise(function(resolve,reject){
-    let a=Math.random()*100;
-    if(a>50){
-        return resolve(a)
-    }
-});
-promise.then(function(res){
-    console.log(res)
-    let b=Math.random()*200;
+
+function test() {
     return new Promise(function(resolve,reject){
-        if(b>100){
-            resolve(b)
-        }
+        var http = new XMLHttpRequest();
+        http.onreadystatechange = function () {
+            if (http.readyState == 4 && http.status == 200) {
+                    if (http.responseText) {
+                        resolve(http.responseText)
+                    }
+            }
+        };
+        http.open("POST","http://localhost:8080/wechatSC/Baby/getExpertList",true);
+        http.send("{data:{'customerId':252,'orgId':40}}")
     })
-}).then(function(res){
-    "use strict";
-    console.log(res)
-})
-console.log("promise")
+}
+test().then(function (res) {
+    console.log("success", res)
+}, function (res) {
+    console.log("failed", res)
+});

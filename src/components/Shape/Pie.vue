@@ -37,9 +37,6 @@
                         .attr("fill",this.$store.state.pie_M.pieColor[index])
                     svg.selectAll("text").enter()
                 })
-
-
-
             }
         }
     }
