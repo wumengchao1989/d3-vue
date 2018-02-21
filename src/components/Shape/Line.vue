@@ -50,17 +50,14 @@
         },
         computed: {},
         created(){
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 100; i++) {
                 this.data.push({
-                    data: i * 10,
+                    data: i*3,
                     value: 300 * Math.random()
                 });
             }
         },
         mounted(){
-            this.renderLine();
-        },
-        updated(){
             this.renderLine();
         },
         methods: {
@@ -98,13 +95,13 @@
                     .attr("fill", "none")
                     .attr("stroke", "red")
                     .attr('transparent', "100%")
-                    .attr("transform", "translate(200,200)");
+                    .attr("transform", "translate(50,50)");
                 svg.append("g")
-                    .attr("transform", "translate(200,200)")
-                    .call(axisLeft)
+                    .attr("transform", "translate(50,50)")
+                    .call(axisLeft);
                 svg.append("g")
-                    .attr("transform", "translate(200,200)")
-                    .call(axisTop)
+                    .attr("transform", "translate(50,50)")
+                    .call(axisTop);
             },
             reRenderLine(a){
                 let easeMethod;
@@ -128,7 +125,6 @@
                     .ease(easeMethod)
                     .duration(1500)
                     .attr("d", line(this.data))
-
             }
         }
     }
@@ -136,7 +132,7 @@
 <style lang="scss" rel="stylesheet/scss" type="text/css">
     #content{
        .btn{
-          background: red;
+          background: #B7FF94;
            margin-right: 1rem;
            width:125px;
            margin-bottom: 16px;
