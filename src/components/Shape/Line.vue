@@ -13,6 +13,7 @@
         },
         methods: {
             renderLine(){
+                
                 let data = [];
                 for (let i = 0; i < 30; i++) {
                     data.push({
