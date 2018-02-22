@@ -1,7 +1,7 @@
 <template>
     <div class="front">
-        <router-link to="/Geo">Geo</router-link>
-        <router-link to="/Shape">Shape</router-link>
+        <router-link to="/geo">Geo</router-link>
+        <router-link to="/shape">Shape</router-link>
     </div>
 </template>
 <script>

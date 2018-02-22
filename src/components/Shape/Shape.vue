@@ -1,7 +1,8 @@
 <template>
     <div>
-        <router-link to="/Shape/pie">Pie</router-link>
-        <router-link to="/Shape/line">Line</router-link>
+        <router-link to="/shape/pie">Pie</router-link>
+        <router-link to="/shape/line">Line</router-link>
+        <router-link to="/shape/histogram">Histogram</router-link>
     </div>
 </template>
 <script>
