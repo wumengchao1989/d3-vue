@@ -4,9 +4,10 @@
 import Router from 'vue-router';
 import Vue from 'vue';
 import Geo from '../components/Geo/Geo.vue';
-import Pie from '../components/Shape/Pie.vue';
+import Shape from '../components/Shape/Shape.vue';
+import Pie from '../components/Shape/subComponent/Pie.vue';
 import test from '../components/Geo/test.vue';
-import line from '../components/Shape/line.vue';
+import line from '../components/Shape/subComponent/Line.vue';
 import front from '../components/front.vue';
 Vue.use(Router);
 export default new Router({
@@ -20,7 +21,12 @@ export default new Router({
             path: '/geo',
             name: "Geo",
             component: Geo,
-        }, {
+        },{
+            path:'/Shape',
+            name:'Shape',
+            component:Shape,
+        },
+        {
             path: '/Shape/Pie',
             name: 'Pie',
             component: Pie,
