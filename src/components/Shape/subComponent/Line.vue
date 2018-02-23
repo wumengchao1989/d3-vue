@@ -50,10 +50,10 @@
         },
         computed: {},
         created(){
-            for (let i = 0; i < 100; i++) {
+            for (let i = -30; i < 30; i++) {
                 this.data.push({
-                    data: i*3,
-                    value: 300 * Math.random()
+                    data: i*10,
+                    value:300- 600 * Math.random()
                 });
             }
         },
@@ -63,10 +63,10 @@
         methods: {
             changeLineData(){
                 let data = [];
-                for (let i = 0; i < 30; i++) {
+                for (let i = -30; i < 30; i++) {
                     data.push({
                         data: i * 10,
-                        value: 300 * Math.random()
+                        value: 300-600 * Math.random()
                     });
                 }
                 this.data = data;
@@ -77,10 +77,9 @@
                     .append("svg")
                     .attr("height", 1080)
                     .attr("width", 1920);
-                let scale = d3.scaleLinear().domain([0, 300]).range([0, 300]);
+                let scale = d3.scaleLinear().domain([-300, 300]).range([-300, 300]);
                 let axisLeft = d3.axisLeft(scale).ticks(5, 's');
                 let axisTop = d3.axisTop(scale).ticks(5, 's');
-
                 let line = d3.line()
                     .x(function (d) {
                         return d.data
@@ -95,12 +94,12 @@
                     .attr("fill", "none")
                     .attr("stroke", "red")
                     .attr('transparent', "100%")
-                    .attr("transform", "translate(50,50)");
+                    .attr("transform", "translate(300,300)");
                 svg.append("g")
-                    .attr("transform", "translate(50,50)")
+                    .attr("transform", "translate(300,300)")
                     .call(axisLeft);
                 svg.append("g")
-                    .attr("transform", "translate(50,50)")
+                    .attr("transform", "translate(300,300)")
                     .call(axisTop);
             },
             reRenderLine(a){
