@@ -2,6 +2,7 @@
     <div class="front">
         <router-link to="/geo">Geo</router-link>
         <router-link to="/shape">Shape</router-link>
+        <router-link to="/force">Force</router-link>
     </div>
 </template>
 <script>

@@ -10,6 +10,9 @@ import Histogram from '../components/Shape/subComponent/Histograms.vue';
 import test from '../components/Geo/test.vue';
 import line from '../components/Shape/subComponent/Line.vue';
 import front from '../components/front.vue';
+/*Force*/
+import Forces from '../components/Forces/Forces.vue';
+import ForceSimulation from '../components/Forces/subComponent/ForceSimulation.vue';
 Vue.use(Router);
 export default new Router({
     routes: [
@@ -18,11 +21,14 @@ export default new Router({
             name: 'front',
             component: front
         },
+        /*geo and geo children*/
         {
             path: '/geo',
             name: "geo",
             component: Geo,
-        },{
+        },
+        /*shape and shape children routes*/
+        {
             path:'/shape',
             name:'shape',
             component:Shape,
@@ -44,6 +50,17 @@ export default new Router({
             path: '/shape/line',
             name: 'line',
             component: line
-        }
+        },
+        /*force and force children routes*/
+        {
+            path: '/force',
+            name: 'force',
+            component: Forces
+        },
+        {
+            path: '/force/forceSimulation',
+            name: 'force',
+            component: ForceSimulation
+        },
     ]
 })

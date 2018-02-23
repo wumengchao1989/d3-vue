@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link to="/Forces/force">force</router-link>
+        <router-link to="/force/forceSimulation">force</router-link>
     </div>
 </template>
 <script>
