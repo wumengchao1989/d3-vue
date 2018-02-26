@@ -9,7 +9,7 @@ import Pie from '../components/Shape/subComponent/Pie.vue';
 import Histogram from '../components/Shape/subComponent/Histograms.vue';
 import test from '../components/Geo/test.vue';
 import line from '../components/Shape/subComponent/Line.vue';
-import front from '../components/front.vue';
+import front from '../demos/front.vue';
 /*Force*/
 import Forces from '../components/Forces/Forces.vue';
 import ForceSimulation from '../components/Forces/subComponent/ForceSimulation.vue';

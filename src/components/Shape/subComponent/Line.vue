@@ -48,6 +48,9 @@
                 }
             }
         },
+        props:{
+           dataList:Array,
+        },
         computed: {},
         created(){
             for (let i = -30; i < 30; i++) {
@@ -60,18 +63,10 @@
         mounted(){
             this.renderLine();
         },
+        updated(){
+            this.renderLine();
+        },
         methods: {
-            changeLineData(){
-                let data = [];
-                for (let i = -30; i < 30; i++) {
-                    data.push({
-                        data: i * 10,
-                        value: 300-600 * Math.random()
-                    });
-                }
-                this.data = data;
-                this.reRenderLine(arguments[0]);
-            },
             renderLine(){
                 let svg = d3.select("#content")
                     .append("svg")
@@ -87,10 +82,10 @@
                     .y(function (d) {
                         return d.value
                     })
-                    .curve(d3.curveCardinal.tension(0.5));//d3生成一个函数line,line里面可以添加data,然后生成一段path路径.
+                    .curve(d3["curveCardinal"].tension(0.5));//d3生成一个函数line,line里面可以添加data,然后生成一段path路径.
                 svg.append("path")
                     .attr("id", "line")
-                    .attr("d", line(this.data))
+                    .attr("d", line(this.dataList))
                     .attr("fill", "none")
                     .attr("stroke", "red")
                     .attr('transparent', "100%")
@@ -123,7 +118,7 @@
                 lineE.transition()
                     .ease(easeMethod)
                     .duration(1500)
-                    .attr("d", line(this.data))
+                    .attr("d", line(this.dataList))
             }
         }
     }
