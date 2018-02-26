@@ -1,7 +1,9 @@
 <template>
     <div class="name">
         <router-view></router-view>
-        <LineA :data-list="dataList" ease-type="easePolyOut" curve-type="curveCatmullRom" :position="position" :dimension="dimension" :scale="scale" :lineStyle="lineStyle">s</LineA>
+        <LineA :data-list="dataList" ease-type="easePolyOut" curve-type="curveCatmullRom" :position="position" :dimension="dimension" :scale="scale" :lineStyle="lineStyle">
+            <div></div>
+        </LineA>
         <button @click="test">test</button>
     </div>
 </template>

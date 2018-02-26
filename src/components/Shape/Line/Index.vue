@@ -107,8 +107,8 @@
                     .call(axisTop);
             },
             renderLine(){
-                console.log(this.lineStyle)
                 let easeMethod;
+                let svg=d3.select("#content svg");
                 if (typeof this.easeType == "string") {
                     easeMethod = d3[this.easeType];
                 } else {
@@ -119,11 +119,8 @@
                 } else {
                     console.warn('props curveType should be defined as String!')
                 }
-
                 for(let i=0;i<this.dataList.length;i++){
                     if(this.dataList[0].length){
-                        console.log(this.lineStyle.colors[i]);
-                        let svg=d3.select("#content svg");
                         svg.append("path")
                             .attr("fill", "none")
                             .attr("d",this.lineGenerator()(this.dataList[i]))
@@ -140,7 +137,6 @@
                         return;
                     }
                 }
-
             },
             lineGenerator(){
                 let scale = d3.scaleLinear().domain(this.scale.domain).range(this.scale.range);
