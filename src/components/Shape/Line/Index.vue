@@ -126,7 +126,7 @@
                             .attr("d",this.lineGenerator()(this.dataList[i]))
                             .attr("stroke", this.lineStyle.colors[i])
                             .attr('transparent', "100%")
-                            .attr("transform", "translate("+this.position.positionX+","+this.position.positionY+")");
+                            .attr("transform", "translate("+this.position.positionX+","+this.position.positionY+")");//TODO:对每一条曲线进行变换
                     }else{
                         let lineE = d3.select("#line");
                         lineE.transition()
