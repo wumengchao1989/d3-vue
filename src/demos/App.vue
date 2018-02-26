@@ -1,27 +1,26 @@
 <template>
     <div class="name">
         <router-view></router-view>
-        <LineA :dataList="dataList"></LineA>
-        <button >test</button>
+        <LineA :data-list="dataList" easeType="easePolyOut" curveType="curveCatmullRom" :position="position" :dimension="dimension">s</LineA>
+        <button @click="test">test</button>
     </div>
 </template>
 <script>
-    import Pie from '../components/Shape/subComponent/Pie.vue';
-    import LineA from '../components/Shape/subComponent/Line.vue';
+    import Pie from '../components/Shape/Pie/Index.vue';
+    import LineA from '../components/Shape/Line/Index.vue';
     export default{
         name: "App",
         data(){
             return {
-                dataList: [{
-                    data: 1,
-                    value: 22
-                }, {
-                    data: 30, value: 32
-                }, {
-                    data: 24, value: 45
-                }, {
-                    data: 23, value: 55
-                }]
+                dataList: [],
+                position:{
+                    positionX:599,
+                    positionY:699
+                },
+                dimension:{
+                    height:1080,
+                    width:1900
+                }
             }
         },
         components: {
@@ -32,17 +31,24 @@
 
         },
         mounted(){
-
+            let data = [];
+            for (let i = 0; i < 100; i++) {
+                data.push({
+                    data: i,
+                    value: 100 * Math.random()
+                });
+                this.dataList = data;
+            }
         },
         methods: {
             test(){
+                let data = [];
                 for (let i = 0; i < 100; i++) {
-                    let data = [];
                     data.push({
                         data: i,
                         value: 100 * Math.random()
                     });
-                    this.data=data;
+                    this.dataList = data;
                 }
             }
         }
@@ -50,7 +56,6 @@
 </script>
 <style lang="scss" rel="stylesheet/scss" type="text/css">
     @import '../style/main';
-
     .name {
         .man {
             height: $width;

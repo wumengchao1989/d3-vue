@@ -5,10 +5,10 @@ import Router from 'vue-router';
 import Vue from 'vue';
 import Geo from '../components/Geo/Geo.vue';
 import Shape from '../components/Shape/Shape.vue';
-import Pie from '../components/Shape/subComponent/Pie.vue';
-import Histogram from '../components/Shape/subComponent/Histograms.vue';
+import Pie from '../components/Shape/Pie/Index.vue';
+import Histogram from '../components/Shape/Histograms/Index.vue';
 import test from '../components/Geo/test.vue';
-import line from '../components/Shape/subComponent/Line.vue';
+import line from '../components/Shape/Line/Index.vue';
 import front from '../demos/front.vue';
 /*Force*/
 import Forces from '../components/Forces/Forces.vue';
