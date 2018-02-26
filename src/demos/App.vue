@@ -1,7 +1,7 @@
 <template>
     <div class="name">
         <router-view></router-view>
-        <LineA :data-list="dataList" easeType="easePolyOut" curveType="curveCatmullRom" :position="position" :dimension="dimension">s</LineA>
+        <LineA :data-list="dataList" ease-type="easePolyOut" curve-type="curveCatmullRom" :position="position" :dimension="dimension" :scale="scale" :lineStyle="lineStyle">s</LineA>
         <button @click="test">test</button>
     </div>
 </template>
@@ -14,12 +14,19 @@
             return {
                 dataList: [],
                 position:{
-                    positionX:599,
-                    positionY:699
+                    positionX:200,
+                    positionY:200
                 },
                 dimension:{
                     height:1080,
                     width:1900
+                },
+                scale:{
+                    domain:[0,100],
+                    range:[0,300]
+                },
+                lineStyle:{
+                    colors:["yellow","red","blue"]
                 }
             }
         },
@@ -34,8 +41,8 @@
             let data = [];
             for (let i = 0; i < 100; i++) {
                 data.push({
-                    data: i,
-                    value: 100 * Math.random()
+                    x: i,
+                    y: 100 * Math.random()
                 });
                 this.dataList = data;
             }
@@ -43,13 +50,17 @@
         methods: {
             test(){
                 let data = [];
-                for (let i = 0; i < 100; i++) {
-                    data.push({
-                        data: i,
-                        value: 100 * Math.random()
-                    });
-                    this.dataList = data;
+                for(let j=0;j<3;j++){
+                    let subData=[];
+                    for (let i = 0; i < 100; i++) {
+                        subData.push({
+                            x: i,
+                            y: 100 * Math.random()
+                        });
+                    }
+                    data.push(subData);
                 }
+                this.dataList=data
             }
         }
     }
