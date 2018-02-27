@@ -24,8 +24,15 @@
                     width:1900
                 },
                 scale:{
-                    domain:[0,100],
-                    range:[0,300]
+                    scaleX:{
+                        domain:[0,100],
+                        range:[0,300]
+                    },
+                    scaleY:{
+                        domain:[0,100],
+                        range:[0,300]
+                    }
+
                 },
                 lineStyle:{
                     colors:["yellow","red","blue"]
@@ -44,7 +51,7 @@
             for (let i = 0; i < 100; i++) {
                 data.push({
                     x: i,
-                    y: 100 * Math.random()
+                    y: i*i/200
                 });
                 this.dataList = data;
             }
@@ -54,10 +61,11 @@
                 let data = [];
                 for(let j=0;j<3;j++){
                     let subData=[];
+                    let param=Math.random()*100
                     for (let i = 0; i < 100; i++) {
                         subData.push({
                             x: i,
-                            y: 100 * Math.random()
+                            y: i*i/param
                         });
                     }
                     data.push(subData);
