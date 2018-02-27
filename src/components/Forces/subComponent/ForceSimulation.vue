@@ -1,32 +1,38 @@
 <template>
-   <canvas width="1920" height="1080"></canvas>
+    <canvas width="1920" height="1080"></canvas>
 </template>
 <script>
     import * as d3 from 'd3';
     export default{
-        name:"forceSimulation",
+        name: "forceSimulation",
         data(){
-            return{
-
-            }
+            return {}
         },
         mounted(){
-            var nodes = d3.range(5000).map(function(i) {
+            var nodes = d3.range(8).map(function (i) {
                 return {
-                    index: i
+                    index: i,
+                    name: "hello"
                 };
             });
 
-            var links = d3.range(nodes.length - 1).map(function(i) {
+            /*var links = d3.range(nodes.length - 1).map(function (i) {
                 return {
-                    source: Math.floor(Math.sqrt(i*3.21)),
+                    source: i,
                     target: i + 1
                 };
-            });
+            });*/
+            var links=[{source:1,target:2},
+                {source:3,target:2},
+                {source:4,target:2},
+                {source:2,target:5},
+                {source:6,target:5},
+                {source:7,target:5},]
+
 
             var simulation = d3.forceSimulation(nodes)
                 .force("charge", d3.forceManyBody())
-                .force("link", d3.forceLink(links).distance(20).strength(1))
+                .force("link", d3.forceLink(links).distance(50).strength(1))
                 .force("x", d3.forceX())
                 .force("y", d3.forceY())
                 .on("tick", ticked);
@@ -42,7 +48,7 @@
                     .subject(dragsubject)
                     .on("start", dragstarted)
                     .on("drag", dragged)
-                    .on("end", dragended));
+                    .on("end", dragended))
 
             function ticked() {
                 context.clearRect(0, 0, width, height);
@@ -51,15 +57,13 @@
 
                 context.beginPath();
                 links.forEach(drawLink);
-                context.strokeStyle = "#aaa";
+                context.strokeStyle = "red";
                 context.stroke();
-
                 context.beginPath();
                 nodes.forEach(drawNode);
                 context.fill();
                 context.strokeStyle = "#fff";
                 context.stroke();
-
                 context.restore();
             }
 
@@ -95,8 +99,6 @@
             }
 
         },
-        methods:{
-
-        }
+        methods: {}
     }
 </script>

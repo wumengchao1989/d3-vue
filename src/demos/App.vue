@@ -1,7 +1,7 @@
 <template>
     <div class="name">
         <router-view></router-view>
-        <LineA :data-list="dataList" ease-type="easePolyOut" curve-type="curveCatmullRom" :position="position" :dimension="dimension" :scale="scale" :lineStyle="lineStyle">
+        <LineA  v-bind="chartConfig"  ease-type="easePolyOut" curve-type="curveCatmullRom">
             <div></div>
         </LineA>
         <button @click="test">test</button>
@@ -14,28 +14,30 @@
         name: "App",
         data(){
             return {
-                dataList: [],
-                position:{
-                    positionX:200,
-                    positionY:200
-                },
-                dimension:{
-                    height:1080,
-                    width:1900
-                },
-                scale:{
-                    scaleX:{
-                        domain:[0,100],
-                        range:[0,300]
+                chartConfig: {
+                    dataList: [],
+                    position: {
+                        positionX: 200,
+                        positionY: 200
                     },
-                    scaleY:{
-                        domain:[0,100],
-                        range:[0,300]
-                    }
+                    dimension: {
+                        height: 1080,
+                        width: 1900
+                    },
+                    scale: {
+                        scaleX: {
+                            domain: [0, 100],
+                            range: [0, 300]
+                        },
+                        scaleY: {
+                            domain: [0, 100],
+                            range: [0, 300]
+                        }
 
-                },
-                lineStyle:{
-                    colors:["yellow","red","blue"]
+                    },
+                    lineStyle: {
+                        colors: []
+                    }
                 }
             }
         },
@@ -53,24 +55,29 @@
                     x: i,
                     y: i*i/200
                 });
-                this.dataList = data;
+                this.chartConfig.dataList = data;
             }
         },
         methods: {
             test(){
                 let data = [];
-                for(let j=0;j<3;j++){
+                for(let j=0;j<1;j++){
                     let subData=[];
-                    let param=Math.random()*100
+                    let param=Math.random()*100;
                     for (let i = 0; i < 100; i++) {
                         subData.push({
                             x: i,
-                            y: i*i/param
+                            y: Math.sin(param*i)*param
                         });
                     }
                     data.push(subData);
+                    var r = Math.round((Math.random()*255)).toString(16);
+                    var g = Math.round((Math.random()*255)).toString(16);
+                    var b = Math.round((Math.random()*255)).toString(16);
+                    var color = "#"+r+g+b;
+                    this.chartConfig.lineStyle.colors.push(color)
                 }
-                this.dataList=data
+                this.chartConfig.dataList=data
             }
         }
     }

@@ -112,8 +112,9 @@
                 let easeMethod;
                 let svg=d3.select("#content svg");
                 let vm=this;
-                let scaleX = d3.scaleLinear().domain(this.scale.scaleX.domain).range(this.scale.scaleX.range);
-                let scaleY = d3.scaleLinear().domain(this.scale.scaleY.domain).range(this.scale.scaleY.range);
+                console.log("data",vm.dataList);
+                let scaleX = d3.scaleLinear().domain(vm.scale.scaleX.domain).range(vm.scale.scaleX.range);
+                let scaleY = d3.scaleLinear().domain(vm.scale.scaleY.domain).range(vm.scale.scaleY.range);
                 svg.selectAll(".line").remove();
                 if (typeof vm.easeType == "string") {
                     easeMethod = d3[vm.easeType];
@@ -127,7 +128,7 @@
                 }
                 for(let i=0;i<vm.dataList.length;i++){
                     if(vm.dataList[0].length){
-                        vm.dataList[i].filter(function(item){
+                        vm.dataList[i]=vm.dataList[i].filter(function(item){
                             return scaleX(item.x)<vm.scale.scaleX.range[1]&&scaleY(item.y)<vm.scale.scaleY.range[1]
                         });
                         svg.append("path")
