@@ -65,7 +65,7 @@
                     .call(axisLeft)
                     .append("g")
                     .append("text")
-                    .text("X")
+                    .text(this.xAxis.name)
                     .attr("fill", "black")
                     .attr("x", 310)
                     .attr("y", 0)
@@ -75,7 +75,7 @@
                     .call(axisTop)
                     .append("g")
                     .append("text")
-                    .text("Y")
+                    .text(this.yAxis.name)
                     .attr("fill", "black")
                     .attr("x", -6)
                     .attr("y", 320)
@@ -86,7 +86,6 @@
                 let easeMethod;
                 let svg = d3.select("#content svg");
                 let vm = this;
-                console.log("data", vm.dataList);
                 let scaleX = d3.scaleLinear().domain(vm.scale.scaleX.domain).range(vm.scale.scaleX.range);
                 let scaleY = d3.scaleLinear().domain(vm.scale.scaleY.domain).range(vm.scale.scaleY.range);
                 svg.selectAll(".line").remove();

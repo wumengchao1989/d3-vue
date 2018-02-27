@@ -18,12 +18,12 @@
                     xAxis:{
                         show:true,//true or false
                         position:"top", //top or bottom
-                        name:"x",
+                        name:"x轴",
                     },
                     yAxis:{
                         show:true,//true or false
                         position:"left", //left or right
-                        name:"y",
+                        name:"y轴",
                     },
                     dataList: [],
                     position: {
