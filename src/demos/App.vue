@@ -15,6 +15,16 @@
         data(){
             return {
                 chartConfig: {
+                    xAxis:{
+                        show:true,//true or false
+                        position:"top", //top or bottom
+                        name:"x",
+                    },
+                    yAxis:{
+                        show:true,//true or false
+                        position:"left", //left or right
+                        name:"y",
+                    },
                     dataList: [],
                     position: {
                         positionX: 200,

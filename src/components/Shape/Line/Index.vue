@@ -6,46 +6,11 @@
     export default{
         name: "LineD",
         data(){
-            return {
-                /*easeTypes: {
-                 easeBounceIn: d3.easeBounceIn,
-                 easeBounceOut: d3.easeBounceOut,
-                 easePolyIn: d3.easePolyIn,
-                 easePolyOut: d3.easePolyOut,
-                 easePoly: d3.easePoly,
-                 easePolyInOut: d3.easePolyInOut,
-                 easeQuadIn: d3.easeQuadIn,
-                 easeQuadOut: d3.easeQuadOut,
-                 easeQuad: d3.easeQuad,
-                 easeQuadInOut: d3.easeQuadInOut,
-                 easeCubicIn: d3.easeCubicIn,
-                 easeCubicOut: d3.easeCubicOut,
-                 easeCubic: d3.easeCubic,
-                 easeCubicInOut: d3.easeCubicInOut,
-                 easeSinIn: d3.easeSinIn,
-                 easeSinOut: d3.easeSinOut,
-                 easeSin: d3.easeSin,
-                 easeSinInOut: d3.easeSinInOut,
-                 easeExpIn: d3.easeExpIn,
-                 easeExpOut: d3.easeExpOut,
-                 easeExp: d3.easeExp,
-                 easeExpInOut: d3.easeExpInOut,
-                 easeCircleIn: d3.easeCircleIn,
-                 easeCircleOut: d3.easeCircleOut,
-                 easeCircle: d3.easeCircle,
-                 easeCircleInOut: d3.easeCircleInOut,
-                 easeElasticIn: d3.easeElasticIn,
-                 easeElastic: d3.easeElastic,
-                 easeElasticOut: d3.easeElasticOut,
-                 easeElasticInOut: d3.easeElasticInOut,
-                 easeBackIn: d3.easeBackIn,
-                 easeBackOut: d3.easeBackOut,
-                 easeBack: d3.easeBack,
-                 easeBackInOut: d3.easeBackInOut,
-                 }*/
-            }
+            return {}
         },
         props: {
+            xAxis: Object,
+            yAxis: Object,
             dataList: Array,
             curveType: {
                 type: String,
@@ -62,25 +27,25 @@
                     positionY: 200
                 }
             },
-            dimension:{
-                type:Object,
-                default:{
-                    width:200,
-                    height:200
+            dimension: {
+                type: Object,
+                default: {
+                    width: 200,
+                    height: 200
                 }
             },
-            scale:Object,
-            lineStyle:{
-                type:Object,
-                default:{
-                    colors:["black"]
+            scale: Object,
+            lineStyle: {
+                type: Object,
+                default: {
+                    colors: ["black"]
                 }
             }
         },
         computed: {},
         mounted(){
             this.renderFrame();
-            this.renderLine();
+            /* this.renderLine();*/
         },
         updated(){
             this.renderLine();
@@ -93,26 +58,35 @@
                     .attr("width", this.dimension.width);
                 let scaleX = d3.scaleLinear().domain(this.scale.scaleX.domain).range(this.scale.scaleX.range);
                 let scaleY = d3.scaleLinear().domain(this.scale.scaleY.domain).range(this.scale.scaleY.range);
-                let axisLeft = d3.axisLeft(scaleX).ticks(5, 's');
-                let axisTop = d3.axisTop(scaleY).ticks(5, 's');
-                svg.append("path")
-                    .attr("class", "line")
-                    .attr("fill", "none")
-                    .attr("stroke", this.lineStyle.colors[0])
-                    .attr('transparent', "100%")
-                    .attr("transform", "translate("+this.position.positionX+","+this.position.positionY+")");
+                let axisLeft = d3.axisLeft(scaleX).ticks(10, 's');
+                let axisTop = d3.axisTop(scaleY).ticks(10, 's');
                 svg.append("g")
-                    .attr("transform","translate("+this.position.positionX+","+this.position.positionY+")")
-                    .call(axisLeft);
+                    .attr("transform", "translate(" + this.position.positionX + "," + this.position.positionY + ")")
+                    .call(axisLeft)
+                    .append("g")
+                    .append("text")
+                    .text("X")
+                    .attr("fill", "black")
+                    .attr("x", 310)
+                    .attr("y", 0)
+                    .attr("text-anchor", "start")
                 svg.append("g")
-                    .attr("transform", "translate("+this.position.positionX+","+this.position.positionY+")")
-                    .call(axisTop);
+                    .attr("transform", "translate(" + this.position.positionX + "," + this.position.positionY + ")")
+                    .call(axisTop)
+                    .append("g")
+                    .append("text")
+                    .text("Y")
+                    .attr("fill", "black")
+                    .attr("x", -6)
+                    .attr("y", 320)
+                    .attr("text-anchor", "start")
+
             },
             renderLine(){
                 let easeMethod;
-                let svg=d3.select("#content svg");
-                let vm=this;
-                console.log("data",vm.dataList);
+                let svg = d3.select("#content svg");
+                let vm = this;
+                console.log("data", vm.dataList);
                 let scaleX = d3.scaleLinear().domain(vm.scale.scaleX.domain).range(vm.scale.scaleX.range);
                 let scaleY = d3.scaleLinear().domain(vm.scale.scaleY.domain).range(vm.scale.scaleY.range);
                 svg.selectAll(".line").remove();
@@ -126,26 +100,26 @@
                 } else {
                     console.warn('props curveType should be defined as String!')
                 }
-                for(let i=0;i<vm.dataList.length;i++){
-                    if(vm.dataList[0].length){
-                        vm.dataList[i]=vm.dataList[i].filter(function(item){
-                            return scaleX(item.x)<vm.scale.scaleX.range[1]&&scaleY(item.y)<vm.scale.scaleY.range[1]
+                for (let i = 0; i < vm.dataList.length; i++) {
+                    if (vm.dataList[0].length) {
+                        vm.dataList[i] = vm.dataList[i].filter(function (item) {
+                            return scaleX(item.x) < vm.scale.scaleX.range[1] && scaleY(item.y) < vm.scale.scaleY.range[1]
                         });
                         svg.append("path")
                             .attr("fill", "none")
                             .attr("class", "line")
-                            .attr("d",vm.lineGenerator()(vm.dataList[i]))
+                            .attr("d", vm.lineGenerator()(vm.dataList[i]))
                             .attr("stroke", vm.lineStyle.colors[i])
                             .attr('transparent', "100%")
-                            .attr("transform", "translate("+vm.position.positionX+","+vm.position.positionY+")");
-                    }else{
+                            .attr("transform", "translate(" + vm.position.positionX + "," + vm.position.positionY + ")");
+                    } else {
                         svg.append("path")
                             .attr("fill", "none")
                             .attr("class", "line")
-                            .attr("d",vm.lineGenerator()(vm.dataList))
+                            .attr("d", vm.lineGenerator()(vm.dataList))
                             .attr("stroke", vm.lineStyle.colors[0])
                             .attr('transparent', "100%")
-                            .attr("transform", "translate("+vm.position.positionX+","+vm.position.positionY+")");
+                            .attr("transform", "translate(" + vm.position.positionX + "," + vm.position.positionY + ")");
                         return;
                     }
                 }
