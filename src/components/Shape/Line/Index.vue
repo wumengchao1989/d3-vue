@@ -111,35 +111,40 @@
             renderLine(){
                 let easeMethod;
                 let svg=d3.select("#content svg");
+                let vm=this;
+                let scaleX = d3.scaleLinear().domain(this.scale.scaleX.domain).range(this.scale.scaleX.range);
+                let scaleY = d3.scaleLinear().domain(this.scale.scaleY.domain).range(this.scale.scaleY.range);
                 svg.selectAll(".line").remove();
-                if (typeof this.easeType == "string") {
-                    easeMethod = d3[this.easeType];
+                if (typeof vm.easeType == "string") {
+                    easeMethod = d3[vm.easeType];
                 } else {
                     console.warn('props easeType should be defined as String!')
                 }
-                if (typeof this.curveType == "string") {
-                    easeMethod = d3[this.curveType];
+                if (typeof vm.curveType == "string") {
+                    easeMethod = d3[vm.curveType];
                 } else {
                     console.warn('props curveType should be defined as String!')
                 }
-                for(let i=0;i<this.dataList.length;i++){
-                    if(this.dataList[0].length){
-                        this.dataList[0].filter((item)=>{return [item.x]});
+                for(let i=0;i<vm.dataList.length;i++){
+                    if(vm.dataList[0].length){
+                        vm.dataList[i].filter(function(item){
+                            return scaleX(item.x)<vm.scale.scaleX.range[1]&&scaleY(item.y)<vm.scale.scaleY.range[1]
+                        });
                         svg.append("path")
                             .attr("fill", "none")
                             .attr("class", "line")
-                            .attr("d",this.lineGenerator()(this.dataList[i]))
-                            .attr("stroke", this.lineStyle.colors[i])
+                            .attr("d",vm.lineGenerator()(vm.dataList[i]))
+                            .attr("stroke", vm.lineStyle.colors[i])
                             .attr('transparent', "100%")
-                            .attr("transform", "translate("+this.position.positionX+","+this.position.positionY+")");
+                            .attr("transform", "translate("+vm.position.positionX+","+vm.position.positionY+")");
                     }else{
                         svg.append("path")
                             .attr("fill", "none")
                             .attr("class", "line")
-                            .attr("d",this.lineGenerator()(this.dataList))
-                            .attr("stroke", this.lineStyle.colors[0])
+                            .attr("d",vm.lineGenerator()(vm.dataList))
+                            .attr("stroke", vm.lineStyle.colors[0])
                             .attr('transparent', "100%")
-                            .attr("transform", "translate("+this.position.positionX+","+this.position.positionY+")");
+                            .attr("transform", "translate("+vm.position.positionX+","+vm.position.positionY+")");
                         return;
                     }
                 }
