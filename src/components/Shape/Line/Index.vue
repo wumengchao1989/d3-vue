@@ -4,7 +4,7 @@
 <script>
     import * as d3 from 'd3';
     export default{
-        name: "LineD",
+        name: "LineChart",
         data(){
             return {}
         },
@@ -45,7 +45,8 @@
         computed: {},
         mounted(){
             this.renderFrame();
-            /* this.renderLine();*/
+            this.axesGenerator();
+             this.renderLine();
         },
         updated(){
             this.renderLine();
@@ -56,6 +57,9 @@
                     .append("svg")
                     .attr("height", this.dimension.height)
                     .attr("width", this.dimension.width);
+            },
+            axesGenerator(){
+                let svg=d3.select("#content>svg");
                 let scaleX = d3.scaleLinear().domain(this.scale.scaleX.domain).range(this.scale.scaleX.range);
                 let scaleY = d3.scaleLinear().domain(this.scale.scaleY.domain).range(this.scale.scaleY.range);
                 let axisLeft = d3.axisLeft(scaleX).ticks(10, 's');
@@ -80,7 +84,6 @@
                     .attr("x", -6)
                     .attr("y", 320)
                     .attr("text-anchor", "start")
-
             },
             renderLine(){
                 let easeMethod;

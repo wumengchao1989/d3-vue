@@ -1,15 +1,15 @@
 <template>
     <div class="name">
         <router-view></router-view>
-        <LineA  v-bind="chartConfig"  ease-type="easePolyOut" curve-type="curveCatmullRom">
+        <line-chart  v-bind="chartConfig"  ease-type="easePolyOut" curve-type="curveCatmullRom">
             <div></div>
-        </LineA>
+        </line-chart>
         <button @click="test">test</button>
     </div>
 </template>
 <script>
     import Pie from '../components/Shape/Pie/Index.vue';
-    import LineA from '../components/Shape/Line/Index.vue';
+    import {LineChart} from '../components/index';
     export default{
         name: "App",
         data(){
@@ -53,7 +53,7 @@
         },
         components: {
             Pie,
-            LineA,
+            LineChart,
         },
         created(){
 
@@ -81,10 +81,10 @@
                         });
                     }
                     data.push(subData);
-                    var r = Math.round((Math.random()*255)).toString(16);
-                    var g = Math.round((Math.random()*255)).toString(16);
-                    var b = Math.round((Math.random()*255)).toString(16);
-                    var color = "#"+r+g+b;
+                    let r = Math.round((Math.random()*255)).toString(16);
+                    let g = Math.round((Math.random()*255)).toString(16);
+                    let b = Math.round((Math.random()*255)).toString(16);
+                    let color = "#"+r+g+b;
                     this.chartConfig.lineStyle.colors.push(color)
                 }
                 this.chartConfig.dataList=data
