@@ -44,7 +44,6 @@
                             domain: [0, 100],
                             range: [0, 300]
                         }
-
                     },
                     lineStyle: {
                         colors: []
@@ -54,9 +53,11 @@
                     dataList:[1,2,3,4,5,6],
                     dimension:{
                         height:450,
-                        width: 920
+                        width: 920,
                     },
-                    
+                    innerRadius:30,
+                    outerRadius:50,
+
                 }
             }
         },

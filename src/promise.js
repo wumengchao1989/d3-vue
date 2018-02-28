@@ -28,6 +28,9 @@
 /**
  * test yield & generator
  * */
+function testFlow(a:Number){
+    console.log("flow",a)
+}
 function *foo(){
     yield console.log("step 1");
     return 1;
@@ -45,6 +48,8 @@ console.log(a);
 console.log(b);
 a.next();
 a.next();
+testFlow("as");
+
 
 
 

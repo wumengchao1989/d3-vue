@@ -6,12 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack webpack.config.js",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "flow": "flow"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
     "bootstrap": "^4.0.0",
     "d3": "^4.13.0",
     "underscore": "^1.8.3",
@@ -23,6 +25,8 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
     "css-loader": "^0.28.9",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.7.2",
