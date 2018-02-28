@@ -4,6 +4,7 @@
         <line-chart  v-bind="chartConfig"  ease-type="easePolyOut" curve-type="curveCatmullRom">
             <div></div>
         </line-chart>
+        <pie v-bind="pieConfig"></pie>
         <button @click="test">test</button>
     </div>
 </template>
@@ -31,8 +32,8 @@
                         positionY: 200
                     },
                     dimension: {
-                        height: 1080,
-                        width: 1900
+                        height:450,
+                        width: 920
                     },
                     scale: {
                         scaleX: {
@@ -48,6 +49,14 @@
                     lineStyle: {
                         colors: []
                     }
+                },
+                pieConfig:{
+                    dataList:[1,2,3,4,5,6],
+                    dimension:{
+                        height:450,
+                        width: 920
+                    },
+                    
                 }
             }
         },

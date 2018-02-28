@@ -10,13 +10,18 @@
         data(){
             return {}
         },
+        props: {
+            dataList: Array,
+
+        },
         mounted(){
             this.createArc();
         },
         methods: {
             createArc(){
+                let vm=this;
                 const svg = d3.select('#content').append('svg').attr('width', 1200).attr("height", 780);
-                const arcs = d3.pie()(this.$store.state.pie_M.pieData)
+                const arcs = d3.pie()(this.dataList);
                 const arc = d3.arc().cornerRadius(5);
                 arcs.map((item, index) => {
                     let that = this;
@@ -27,7 +32,7 @@
                         .endAngle(item.endAngle)
                         .padAngle(0.04)
                         .cornerRadius(5);
-                    let centroid=arcLine.centroid();
+                    let centroid = arcLine.centroid();
                     svg.append("path")
                         .attr("transform", "translate(400,300)")
                         .attr("d", arcLine)

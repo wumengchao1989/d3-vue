@@ -3,6 +3,14 @@
 </template>
 <script>
     import * as d3 from 'd3';
+    var mixin = {
+        created: function () {
+            console.log('混入对象的钩子被调用')
+        },
+        mounted: function () {
+            console.log("mounted mixin")
+        }
+    }
     export default{
         name: "LineChart",
         data(){
@@ -42,11 +50,31 @@
                 }
             }
         },
-        computed: {},
+        computed: {
+            xDomain: function () {
+                return this.scale.scaleX.domain;
+            },
+            yDomain: function () {
+                return this.scale.scaleY.domain;
+            },
+            xRange: function () {
+                return this.scale.scaleX.range;
+            },
+            yRange: function () {
+                return this.scale.scaleY.range;
+            },
+            positionX:function(){
+                return this.position.positionX;
+            },
+            positionY:function(){
+                return this.position.positionY;
+            }
+
+        },
         mounted(){
             this.renderFrame();
             this.axesGenerator();
-             this.renderLine();
+            this.renderLine();
         },
         updated(){
             this.renderLine();
@@ -59,13 +87,14 @@
                     .attr("width", this.dimension.width);
             },
             axesGenerator(){
-                let svg=d3.select("#content>svg");
-                let scaleX = d3.scaleLinear().domain(this.scale.scaleX.domain).range(this.scale.scaleX.range);
-                let scaleY = d3.scaleLinear().domain(this.scale.scaleY.domain).range(this.scale.scaleY.range);
+                let vm = this;
+                let svg = d3.select("#content>svg");
+                let scaleX = d3.scaleLinear().domain(vm.xDomain).range(vm.xRange);
+                let scaleY = d3.scaleLinear().domain(vm.yDomain).range(vm.yRange);
                 let axisLeft = d3.axisLeft(scaleX).ticks(10, 's');
                 let axisTop = d3.axisTop(scaleY).ticks(10, 's');
                 svg.append("g")
-                    .attr("transform", "translate(" + this.position.positionX + "," + this.position.positionY + ")")
+                    .attr("transform", "translate(" + vm.positionX + "," + vm.positionY + ")")
                     .call(axisLeft)
                     .append("g")
                     .append("text")
@@ -73,9 +102,9 @@
                     .attr("fill", "black")
                     .attr("x", 310)
                     .attr("y", 0)
-                    .attr("text-anchor", "start")
+                    .attr("text-anchor", "start");
                 svg.append("g")
-                    .attr("transform", "translate(" + this.position.positionX + "," + this.position.positionY + ")")
+                    .attr("transform", "translate(" + vm.positionX + "," + vm.positionY + ")")
                     .call(axisTop)
                     .append("g")
                     .append("text")
@@ -86,11 +115,11 @@
                     .attr("text-anchor", "start")
             },
             renderLine(){
-                let easeMethod;
-                let svg = d3.select("#content svg");
                 let vm = this;
-                let scaleX = d3.scaleLinear().domain(vm.scale.scaleX.domain).range(vm.scale.scaleX.range);
-                let scaleY = d3.scaleLinear().domain(vm.scale.scaleY.domain).range(vm.scale.scaleY.range);
+                let svg = d3.select("#content svg");
+                let easeMethod;
+                let scaleX = d3.scaleLinear().domain(vm.xDomain).range(vm.xRange);
+                let scaleY = d3.scaleLinear().domain(vm.yDomain).range(vm.yRange);
                 svg.selectAll(".line").remove();
                 if (typeof vm.easeType == "string") {
                     easeMethod = d3[vm.easeType];
@@ -127,8 +156,9 @@
                 }
             },
             lineGenerator(){
-                let scaleX = d3.scaleLinear().domain(this.scale.scaleX.domain).range(this.scale.scaleX.range);
-                let scaleY = d3.scaleLinear().domain(this.scale.scaleY.domain).range(this.scale.scaleY.range);
+                let vm=this;
+                let scaleX = d3.scaleLinear().domain(vm.xDomain).range(vm.yRange);
+                let scaleY = d3.scaleLinear().domain(vm.xDomain).range(vm.yRange);
                 return d3.line()
                     .x(function (d) {
                         return scaleX(d.x)
@@ -138,7 +168,7 @@
                     })
                     .curve(d3[this.curveType]);
             }
-        }
+        },
     }
 </script>
 <style lang="scss" rel="stylesheet/scss" type="text/css">
