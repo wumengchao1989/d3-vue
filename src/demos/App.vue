@@ -57,7 +57,11 @@
                     },
                     innerRadius:30,
                     outerRadius:50,
-
+                    cornerRadius:20,
+                    position: {
+                        positionX: 500,
+                        positionY: 500
+                    },
                 }
             }
         },

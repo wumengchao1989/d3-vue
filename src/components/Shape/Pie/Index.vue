@@ -10,23 +10,49 @@
         data(){
             return {}
         },
+        computed:{
+            xDomain: function () {
+                return this.scale.scaleX.domain;
+            },
+            yDomain: function () {
+                return this.scale.scaleY.domain;
+            },
+            xRange: function () {
+                return this.scale.scaleX.range;
+            },
+            yRange: function () {
+                return this.scale.scaleY.range;
+            },
+            positionX:function(){
+                return this.position.positionX;
+            },
+            positionY:function(){
+                return this.position.positionY;
+            }
+        },
         props: {
             dataList: Array,
             dimension:Object,
+            position:Object,
             innerRadius:[Number,String],
             outerRadius:[Number,String],
-
-
+            cornerRadius:[Number,String],
         },
         mounted(){
             this.createArc();
         },
         methods: {
+            renderFrame(){
+                let svg = d3.select("#content")
+                    .append("svg")
+                    .attr("height", this.dimension.height)
+                    .attr("width", this.dimension.width)
+                .attr("id","pie")
+            },
             createArc(){
                 let vm=this;
-                const svg = d3.select('#content').append('svg').attr('width', 1200).attr("height", 780);
-                const arcs = d3.pie()(vm.dataList);
-                const arc = d3.arc().cornerRadius(5);
+                let arcs = d3.pie()(vm.dataList);
+                let svg = d3.select("#pie");
                 arcs.map((item, index) => {
                     let arcLine = d3.arc()
                         .innerRadius(vm.innerRadius)
@@ -34,10 +60,10 @@
                         .startAngle(item.startAngle)
                         .endAngle(item.endAngle)
                         .padAngle(0.2)
-                        .cornerRadius(3);
+                        .cornerRadius(vm.cornerRadius);
                     let centroid = arcLine.centroid();
                     svg.append("path")
-                        .attr("transform", "translate(400,300)")
+                        .attr("transform", "translate(500,500)")
                         .attr("d", arcLine)
                         .attr("stroke", "black")
                         .attr("fill", this.$store.state.pie_M.pieColor[index])
@@ -69,7 +95,6 @@
                     .duration(1500)
                     .attr("d", arcZoom);
             },
-
         }
     }
 </script>
