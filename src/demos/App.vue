@@ -11,6 +11,7 @@
 <script>
     import Pie from '../components/Shape/Pie/Index.vue';
     import {LineChart} from '../components/index';
+    console.log(Pie)
     export default{
         name: "App",
         data(){
